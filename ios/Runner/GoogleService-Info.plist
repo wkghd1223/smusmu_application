@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>60426296907-oimsp3k13hjjiinigke81ckgg7hov11k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.60426296907-oimsp3k13hjjiinigke81ckgg7hov11k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAgzCfu6OjlWsMo3Yzj3v6Fbb8vsFwylQA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>60426296907</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>kr.co.smusmu</string>
+	<key>PROJECT_ID</key>
+	<string>smusmu-841ec</string>
+	<key>STORAGE_BUCKET</key>
+	<string>smusmu-841ec.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:60426296907:ios:d2b179979e478a536d77ce</string>
+	<key>DATABASE_URL</key>
+	<string>https://smusmu-841ec.firebaseio.com</string>
+</dict>
+</plist>

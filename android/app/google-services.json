@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "60426296907",
+    "firebase_url": "https://smusmu-841ec.firebaseio.com",
+    "project_id": "smusmu-841ec",
+    "storage_bucket": "smusmu-841ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60426296907:android:00261262167056926d77ce",
+        "android_client_info": {
+          "package_name": "kr.co.smusmu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60426296907-ojr6vratgehupbn4gr0rr7kkieooo344.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhoIfqqlzgSV2V169t8KCXaxdiqGrtf4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60426296907-ojr6vratgehupbn4gr0rr7kkieooo344.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
