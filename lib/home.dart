@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smusmu/auth.dart';
 import 'package:smusmu/locale/Translations.dart';
 
 class Home extends StatefulWidget{
@@ -20,12 +22,27 @@ class _HomeState extends State<Home>{
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<Auth>(context);
     return
       SafeArea(
         child: Scaffold(
-          appBar: AppBar(title: Text("smusmu"),),
           body: Center(
-            child: Text("asdf"),
+            child: Column(
+              children: [
+                RaisedButton(
+                  child: Text("login"),
+                  onPressed: (){
+                    auth.logIn();
+                  },
+                ),
+                RaisedButton(
+                  child: Text("logout"),
+                  onPressed: (){
+                    auth.logOut();
+                  },
+                )
+              ],
+            ),
           )
       ),
     );

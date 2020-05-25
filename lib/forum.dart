@@ -23,7 +23,9 @@ class _ForumState extends State<Forum>{
     return
       SafeArea(
         child: Scaffold(
-            appBar: AppBar(title: Text("smusmu"),),
+          appBar: AppBar(
+            title: Text(locale("forum", context)),
+          ),
             body: Center(
               child: Text("asdf"),
             )

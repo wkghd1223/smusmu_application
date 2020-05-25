@@ -2,5 +2,6 @@
   "hi": "안녕",
   "home": "홈",
   "forum": "게시판",
-  "notification" : "알림"
+  "notification" : "알림",
+  "user": "사용자"
 }

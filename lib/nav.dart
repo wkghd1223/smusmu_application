@@ -1,76 +1,79 @@
+import 'package:bottom_navigation_badge/bottom_navigation_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smusmu/forum.dart';
 import 'package:smusmu/locale/Translations.dart';
-
+import 'package:smusmu/user.dart';
 import 'home.dart';
+import 'notification.dart';
 
-class User{
-  int _id;
-  String _userName;
-  User(int id, String userName){
-    this._id = id;
-    this._userName = userName;
-  }
-  String get id{ return _id.toString();}
-  String get userName{ return _userName.toString();}
-}
 class Nav extends StatefulWidget{
   _NavState createState() => _NavState();
 }
 class _NavState extends State<Nav>{
-  List<User> users = List<User>();
+  BottomNavigationBadge badger = new BottomNavigationBadge(
+      backgroundColor: Colors.red,
+      badgeShape: BottomNavigationBadgeShape.circle,
+      textColor: Colors.white,
+      position: BottomNavigationBadgePosition.topRight,
+      textSize: 8);
   int _currentIndex =0;
-  final List<Widget> _children = [Home(),Home(),Home()];
+  final List<Widget> _children = [Home(), Forum(), Notifications(),User()];
+  List<BottomNavigationBarItem> _navs = List<BottomNavigationBarItem>();
   @override
   initState() {
     // 부모의 initState호출
     super.initState();
 
   }
-  Future getData() async{
-
-    print("asdf");
-  }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    print("asdf");
-    getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-      SafeArea(
+    if(_navs.isEmpty) {
+      _navs = [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text(locale("home", context))
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.airplay),
+            title: Text(locale("forum", context))
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            title: Text(locale("notification", context))
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            title: Text(locale("user", context))
+        ),
+      ];
+      _navs = badger.setBadge(_navs, "1", 2);
+      print("initialize Bottom Nav...");
+    }
+    return SafeArea(
         child: Scaffold(
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           onTap: (index)=>{
-          setState(()=>{
-          _currentIndex = index
+          setState((){
+            _currentIndex = index;
+            print("Bottom Nav Index | $index");
+            if(index == 2){
+              _navs = badger.removeBadge(_navs, 2);
+            }
           })
         },
           currentIndex: _currentIndex,
-          items: [
-            new BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text(locale("home", context))
-            ),
-            new BottomNavigationBarItem(
-                icon: Icon(Icons.airplay),
-                title: Text(locale("forum", context))
-            ),
-            new BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                title: Text(locale("notification", context))
-            ),
-          ],
+          items: _navs,
         ),
       ),
     );
   }
-
-
 }
