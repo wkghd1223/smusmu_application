@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'home.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'locale/Translations.dart';
+import 'nav.dart';
+
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
 void main() {
   runApp(MyApp());
 }
@@ -56,7 +62,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var next = MaterialPageRoute(builder: (context) => Home());
+  var next = MaterialPageRoute(builder: (context) => Nav());
+  void firebaseCloudMessagingListeners(){
+    if(Platform.isIOS) iOSPermission();
+    _firebaseMessaging.getToken().then((token) => {
+      print('token | $token')
+    });
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+      },
+    );
+  }
+  void iOSPermission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true)
+    );
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings)
+    {
+      print("Settings registered: $settings");
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    firebaseCloudMessagingListeners();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
