@@ -32,7 +32,8 @@ class _HomeState extends State<Home>{
                 RaisedButton(
                   child: Text("login"),
                   onPressed: (){
-                    auth.logIn();
+                    context.read<Auth>().logIn();
+//                    auth.logIn();
                   },
                 ),
                 RaisedButton(
@@ -40,7 +41,14 @@ class _HomeState extends State<Home>{
                   onPressed: (){
                     auth.logOut();
                   },
-                )
+                ),
+                RaisedButton(
+                  child: Text("council"),
+                  onPressed: (){
+                    context.read<Auth>().makeCouncil();
+//                    auth.logIn();
+                  },
+                ),
               ],
             ),
           )
