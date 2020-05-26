@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:provider/provider.dart';
-import 'auth.dart';
-import 'package:smusmu/item.dart';
+import 'func/auth.dart';
+import 'package:smusmu/func/item.dart';
 import 'locale/Translations.dart';
 import 'nav.dart';
 
 void main() {
   runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (_)=> Auth(),
-      )
-    ],
-    child: MyApp(),
+      providers: [
+        ChangeNotifierProvider(
+          create: (_)=> Auth(),
+        )
+      ],
+      child :MyApp(),
   ));
 }
 
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     firebaseCloudMessagingListeners();
     Future.delayed(Duration(seconds: 1),()=>{
-      Navigator.push(context, next)
+      Navigator.pushReplacement(context, next)
     });
   }
   @override

@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smusmu/locale/Translations.dart';
 
-import 'auth.dart';
+import '../func/auth.dart';
 
 Widget userWithAuth(BuildContext context){
   String a = '일반학생';
   String b = '학생회';
-
   return Center(
-    child: Text("login\n${context.watch<Auth>().status == 2 ? b : a}"),
+    child: Text("login\n${ context.watch<Auth>().status == Status.COUNCIL ? b : a}"),
   );
 }
 Widget userWithoutAuth(){
@@ -35,8 +34,6 @@ class _UserState extends State<User>{
   }
   @override
   Widget build(BuildContext context) {
-//    final auth = Provider.of<Auth>(context);
-
-    return /*auth.status*/ context.watch<Auth>().status  != 0 ? userWithAuth(context) : userWithoutAuth();
+    return context.watch<Auth>().status  != Status.LOGOUT ? userWithAuth(context) : userWithoutAuth();
   }
 }

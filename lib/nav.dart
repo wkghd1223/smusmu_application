@@ -1,11 +1,13 @@
 import 'package:bottom_navigation_badge/bottom_navigation_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smusmu/forum.dart';
+import 'package:provider/provider.dart';
+import 'navigation/forum.dart';
 import 'package:smusmu/locale/Translations.dart';
-import 'package:smusmu/user.dart';
-import 'home.dart';
-import 'notification.dart';
+import 'navigation/user.dart';
+import 'func/auth.dart';
+import 'navigation/home.dart';
+import 'navigation/notification.dart';
 
 class Nav extends StatefulWidget{
   _NavState createState() => _NavState();
@@ -56,24 +58,22 @@ class _NavState extends State<Nav>{
       _navs = badger.setBadge(_navs, "1", 2);
       print("initialize Bottom Nav...");
     }
-    return SafeArea(
-        child: Scaffold(
-          body: _children[_currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          onTap: (index)=>{
-          setState((){
-            _currentIndex = index;
-            print("Bottom Nav Index | $index");
-            if(index == 2){
-              _navs = badger.removeBadge(_navs, 2);
-            }
-          })
-        },
-          currentIndex: _currentIndex,
-          items: _navs,
-        ),
-      ),
-    );
+    return Scaffold(
+              body: _children[_currentIndex],
+              bottomNavigationBar: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                onTap: (index)=>{
+                  setState((){
+                    _currentIndex = index;
+                    print("Bottom Nav Index | $index");
+                    if(index == 2){
+                      _navs = badger.removeBadge(_navs, 2);
+                    }
+                  })
+                },
+                currentIndex: _currentIndex,
+                items: _navs,
+              ),
+            );
   }
 }

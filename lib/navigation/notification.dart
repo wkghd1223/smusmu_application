@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:smusmu/item.dart';
+import 'package:smusmu/func/item.dart';
 import 'package:smusmu/locale/Translations.dart';
 
 

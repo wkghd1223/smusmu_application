@@ -6,10 +6,10 @@ enum Status{
   LOGIN,
   COUNCIL
 }
-class Auth with ChangeNotifier , DiagnosticableTreeMixin{
+class Auth with ChangeNotifier , DiagnosticableTreeMixin {
   Status _status = Status.LOGOUT;
-  int get status {
-    return _status == Status.LOGOUT ? 0 : _status == Status.LOGIN ? 1 : 2;
+  Status get status {
+    return _status;
   }
   void logIn(){
     _status=Status.LOGIN;
@@ -23,10 +23,8 @@ class Auth with ChangeNotifier , DiagnosticableTreeMixin{
     _status = Status.COUNCIL;
     notifyListeners();
   }
-  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    // TODO: implement debugFillProperties
     super.debugFillProperties(properties);
-    properties.add(IntProperty('status',status));
+    properties.add(EnumProperty('status', status));
   }
 }

@@ -1,7 +1,14 @@
 {
   "hi": "Chào",
   "home": "Trang Chủ",
-  "forum": "bảng ghi chú",
+  "forum": "Bảng ghi chú",
+  "free_board": "Ban miễn phí",
   "notification" : "để ý",
-  "user": "người dùng"
+  "user": "Người dùng",
+
+  "title": "Tiêu đề",
+  "main_text": "Văn bản chính",
+
+  "like": "Tốt",
+  "dislike": "Ghét"
 }

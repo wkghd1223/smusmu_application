@@ -2,6 +2,13 @@
   "hi": "안녕",
   "home": "홈",
   "forum": "게시판",
+  "free_board": "자유게시판",
   "notification" : "알림",
-  "user": "사용자"
+  "user": "사용자",
+
+  "title": "제목",
+  "main_text": "본문",
+
+  "like": "좋아요",
+  "dislike": "싫어요"
 }

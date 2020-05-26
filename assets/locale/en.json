@@ -2,6 +2,13 @@
   "hi": "hi",
   "home": "Home",
   "forum": "Forum",
+  "free_board": "Free Board",
   "notification" : "Notification",
-  "user": "User"
+  "user": "User",
+
+  "title": "Title",
+  "main_text": "Main Text",
+
+  "like": "like",
+  "dislike": "dislike"
 }
