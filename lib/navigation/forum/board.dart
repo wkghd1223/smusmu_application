@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smusmu/func/func.dart';
 import 'package:smusmu/locale/Translations.dart';
+import 'package:smusmu/navigation/forum/create.dart';
 import 'package:smusmu/navigation/forum/post.dart';
 
 class Board extends StatefulWidget{
@@ -31,9 +32,19 @@ class _BoardState extends State<Board>{
 
     return Scaffold(
         appBar: forumAppBar(locale(boardType, context)),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          backgroundColor: Colors.orange,
+          onPressed: ((){
+            Navigator.push(context, MaterialPageRoute(builder:(context)=>CreatePost(boardType: boardType,)));
+          }),
+        ),
         body: SafeArea(
             child: StreamBuilder<QuerySnapshot>(
-                stream: Firestore.instance.collection("BOARD").snapshots(),
+                stream: Firestore.instance
+                    .collection("BOARD")
+                    .orderBy('REG_DATE', descending: true)
+                    .snapshots(),
                 builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError)
                     return Text("Error: ${snapshot.error}");
