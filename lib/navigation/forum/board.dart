@@ -1,35 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smusmu/func/func.dart';
 import 'package:smusmu/locale/Translations.dart';
+import 'package:smusmu/navigation/forum/post.dart';
 
 class Board extends StatefulWidget{
-  _BoardState createState() => _BoardState();
+  final String boardType;
+  const Board({Key key, this.boardType}) : super(key: key);
+  _BoardState createState() => _BoardState(boardType);
 }
 class _BoardState extends State<Board>{
-  RefreshController _controller;
-  final _children = <Widget>[];
-  
-  Future<void> _onRefresh() async{
-    print('refreshing article...');
+  final String boardType;
 
-    setState(() {
-    });
-
-    _controller.refreshCompleted();
-  }
-  void _onLoading() async {
-    await Future.delayed(Duration(milliseconds: 400));
-    setState(() {
-    });
-    _controller.refreshCompleted();
-  }
+  _BoardState(this.boardType);
   @override
   initState() {
     // 부모의 initState호출
     super.initState();
-    _controller = new RefreshController();
   }
   @override
   void didChangeDependencies() {
@@ -40,34 +29,70 @@ class _BoardState extends State<Board>{
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
-        child: Scaffold(
-            appBar: forumAppBar(locale("free_board", context)),
-            body: SmartRefresher(
-              child: ListView(
-                children: <Widget>[
-                    ListTile(
-                      title: Text("${locale("title", context)}${_children.length}"),
-                      subtitle: Text(locale("main_text", context)),
-                      trailing: Container(
-                        child: Column(
-                        children: [
-
-                          Icon(Icons.thumb_up),
-                          Icon(Icons.thumb_down)
-
-                        ],
-                      ),
-                    ),
-                    )
-                ]
-              ),
-              controller: _controller,
-              onLoading: _onLoading,
-              onRefresh: _onRefresh,
-            ),
+    return Scaffold(
+        appBar: forumAppBar(locale(boardType, context)),
+        body: SafeArea(
+            child: StreamBuilder<QuerySnapshot>(
+                stream: Firestore.instance.collection("BOARD").snapshots(),
+                builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError)
+                    return Text("Error: ${snapshot.error}");
+                  switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return loading();
+                  default:
+                    return ListView(
+                      children: snapshot.data.documents
+                        .where((element) => element.data["BOARD_CODE"] == boardType ? true : false )
+                        .map((DocumentSnapshot document){
+                          return Card(
+                            elevation: 2,
+                            child: ListTile(
+//                              leading: Text("temp"),
+                              title: Container(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            document["POST_NAME"]
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.thumb_up),
+                                              Icon(Icons.thumb_down)
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onTap: ((){
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => Post(
+                                    boardType: boardType,
+                                    postId: document['POST_ID'],
+                                    writer: document['USER_ID'],
+                                    documentId: document.documentID,
+                                  )
+                                ));
+                              }),
+                            )
+                          );
+                      }).toList()
+                    );
+                  }
+                }
+              )
 
         )
       );
   }
 }
+

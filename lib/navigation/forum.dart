@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smusmu/func/func.dart';
@@ -23,24 +24,39 @@ class _ForumState extends State<Forum>{
   @override
   Widget build(BuildContext context) {
     return
-      SafeArea(
-        child: Scaffold(
-          appBar: forumAppBar(locale("forum", context)),
-            body: Container(
+      Scaffold(
+        appBar: forumAppBar(locale("forum", context)),
+        body: SafeArea(
+          child: Container(
               color: Colors.white,
-              child: ListView(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.people),
-                    title: Text(locale("free_board", context)),
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Board()));
-                    },
-                  )
-                ],
+              child:
+                StreamBuilder<QuerySnapshot>(
+                stream: Firestore.instance.collection("BOARD_LIST").snapshots(),
+                builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError)
+                return Text("Error: ${snapshot.error}");
+                switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                return loading();
+                default:
+                return ListView(
+                  children: snapshot.data.documents
+                  .map((DocumentSnapshot document){
+                    return ListTile(
+                      leading: boardIcon(document['BOARD_CODE']),
+                      title: Text(locale(document['BOARD_CODE'], context)),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Board(
+                          boardType:document['BOARD_CODE']
+                        )));
+                      },
+                    );
+                  }).toList(),
+                );
+                }})
+
               ),
             )
-        ),
-      );
+        );
   }
 }
