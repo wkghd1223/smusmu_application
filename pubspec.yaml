@@ -30,6 +30,7 @@ dependencies:
   firebase_messaging: ^6.0.15
   bottom_navigation_badge: ^1.0.3
   pull_to_refresh: ^1.5.8
+  image_picker: ^0.6.7
   flutter_localizations:
     sdk: flutter
   # The following adds the Cupertino Icons font to your application.
