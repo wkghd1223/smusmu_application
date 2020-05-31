@@ -17,6 +17,7 @@
 
   "write": "글 작성",
   "delete": "삭제",
+  "update": "수정",
   "real_delete": "정말 지우시겠습니까?",
   "send_message": "쪽지 보내기",
 

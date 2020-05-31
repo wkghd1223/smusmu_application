@@ -17,6 +17,7 @@
 
   "write": "Viết",
   "delete": "Xóa bỏ",
+  "update" : "Cập nhật",
   "real_delete": "Bạn có muốn xóa tài liệu này?",
   "send_message": "Gửi tin nhắn",
 

@@ -38,7 +38,9 @@ class _PostState extends State<Post> {
 
   @override
   Widget build(BuildContext context) {
-    var threeDotMenuWriter = {"delete"};
+    /// 게시물 작성자일 경우 3점 메뉴
+    var threeDotMenuWriter = {"delete", "update"};
+    /// 게시물 작성자가 아닐 경우 3점 메뉴
     var threeDotMenuNotWriter = {"send_message"};
     return
       Scaffold(
@@ -310,15 +312,4 @@ class _PostState extends State<Post> {
         });
   }
   /// 댓글 삭제 다이얼로그 종료
-  ///
-  Future<int> countReplies() async {
-    var replies = [];
-    Firestore.instance.collection('BOARD')
-        .document(documentId)
-        .get()
-        .then((value) {
-          replies = value['POST_REPLY'];
-    });
-    return replies.length; // Count of Replies
-  }
 }
