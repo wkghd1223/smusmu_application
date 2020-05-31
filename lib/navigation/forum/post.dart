@@ -159,7 +159,7 @@ class _PostState extends State<Post> {
                                       /// 댓글 시작 ///
                                       Column(
                                         children: reply.length ==0 ? empty : reply.asMap().map((i, element){
-                                          return MapEntry(i, InkWell(
+                                          return element['STATUS'] ? MapEntry(i, InkWell(
                                             onLongPress: (){
                                               showDeleteReplyDialog(i);
                                             },
@@ -173,7 +173,22 @@ class _PostState extends State<Post> {
                                                 ],
                                               ),
                                             ),
-                                          ));
+                                          )) :
+                                          MapEntry(i,InkWell(
+                                            onLongPress: (){
+                                              showDeleteReplyDialog(i);
+                                            },
+                                            child: ListTile(
+//                                              leading:Text(element['USER_ID']),
+                                              title: Text(locale("has_been_delete", context)),
+//                                              trailing: Column(
+//                                                children: [
+//                                                  Icon(Icons.thumb_up),
+//                                                  Icon(Icons.thumb_down)
+//                                                ],
+//                                              ),
+                                            ),
+                                          )) ;
                                         }).values.toList()
                                       )
                                       /// 댓글 종료 ///
@@ -198,7 +213,8 @@ class _PostState extends State<Post> {
       "REPLY_LIKES":0,
       "REPLY_DISLIKES":0,
       "REPLY_TIME":Timestamp.now(),
-      "USER_ID":userId
+      "USER_ID":userId,
+      "STATUS": true
     }];
     Firestore.instance.collection('BOARD').document(documentId).updateData({"POST_REPLY": FieldValue.arrayUnion(obj)});
     _textController.clear();
@@ -270,10 +286,7 @@ class _PostState extends State<Post> {
                   ),),
                 onPressed: () {
                   /// 댓글 삭제
-//                  Firestore.instance.collection('BOARD')
-//                      .document(documentId)
-//                      .updateData({"POST_REPLY" : FieldValue.arrayRemove()});
-                  //  {"POST_REPLY": FieldValue.arrayUnion(obj)};
+
                   /// 1번 pop
                   Navigator.pop(context);
                 },

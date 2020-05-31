@@ -10,6 +10,7 @@
 
   "title": "Tiêu đề",
   "main_text": "Văn bản chính",
+  "has_been_delete" : "Tin nhắn này đã bị xóa.",
 
   "like": "Tốt",
   "dislike": "Ghét",

@@ -10,6 +10,7 @@
 
   "title": "Title",
   "main_text": "Main Text",
+  "has_been_delete" : "This message has been deleted.",
 
   "like": "like",
   "dislike": "dislike",

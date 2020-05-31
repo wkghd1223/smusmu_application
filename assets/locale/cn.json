@@ -10,6 +10,7 @@
 
   "title": "标题",
   "main_text": "正文",
+  "has_been_delete" : "该消息已被删除。",
 
   "like": "好",
   "dislike": "讨厌",

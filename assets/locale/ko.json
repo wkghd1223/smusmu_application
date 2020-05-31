@@ -10,6 +10,7 @@
 
   "title": "제목",
   "main_text": "본문",
+  "has_been_delete" : "삭제된 메세지 입니다.",
 
   "like": "좋아요",
   "dislike": "싫어요",
