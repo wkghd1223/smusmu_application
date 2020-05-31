@@ -286,9 +286,23 @@ class _PostState extends State<Post> {
                   ),),
                 onPressed: () {
                   /// 댓글 삭제
+                  var replies = [];
+                  Firestore.instance.collection('BOARD')
+                      .document(documentId)
+                      .get()
+                      .then((value) {
+                    replies = value['POST_REPLY'];
+                    replies[index]['STATUS'] = false;
 
-                  /// 1번 pop
-                  Navigator.pop(context);
+                    Firestore.instance
+                        .collection('BOARD')
+                        .document(documentId)
+                        .updateData({"POST_REPLY": replies});
+
+                    /// 1번 pop
+                    Navigator.pop(context);
+                  });
+
                 },
               )
             ],
@@ -299,7 +313,7 @@ class _PostState extends State<Post> {
   ///
   Future<int> countReplies() async {
     var replies = [];
-    await Firestore.instance.collection('BOARD')
+    Firestore.instance.collection('BOARD')
         .document(documentId)
         .get()
         .then((value) {
