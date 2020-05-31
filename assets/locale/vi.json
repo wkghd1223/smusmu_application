@@ -10,12 +10,14 @@
 
   "title": "Tiêu đề",
   "main_text": "Văn bản chính",
+  "has_been_delete" : "Tin nhắn này đã bị xóa.",
 
   "like": "Tốt",
   "dislike": "Ghét",
 
   "write": "Viết",
   "delete": "Xóa bỏ",
+  "update" : "Cập nhật",
   "real_delete": "Bạn có muốn xóa tài liệu này?",
   "send_message": "Gửi tin nhắn",
 
