@@ -14,5 +14,11 @@
   "like": "좋아요",
   "dislike": "싫어요",
 
-  "write": "글 작성"
+  "write": "글 작성",
+  "delete": "삭제",
+  "real_delete": "정말 지우시겠습니까?",
+  "send_message": "쪽지 보내기",
+
+  "cancel": "취소",
+  "comment_me": "댓글을 달아주세요!"
 }

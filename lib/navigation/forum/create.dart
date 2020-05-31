@@ -104,7 +104,8 @@ class _CreatePostState extends State<CreatePost> {
         "POST_DISLIKE":0,
         "POST_NAME":_titleController.text,
         "POST_ID":numberOfDocument,
-        "REG_DATE":Timestamp.now()
+        "REG_DATE":Timestamp.now(),
+        "USER_ID":userId
       }
     );
     

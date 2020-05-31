@@ -14,5 +14,11 @@
   "like": "Tốt",
   "dislike": "Ghét",
 
-  "write": "Viết"
+  "write": "Viết",
+  "delete": "Xóa bỏ",
+  "real_delete": "Bạn có muốn xóa tài liệu này?",
+  "send_message": "Gửi tin nhắn",
+
+  "cancel": "Hủy bỏ",
+  "comment_me": "Nhận xét tôi!"
 }
