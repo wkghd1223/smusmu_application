@@ -226,7 +226,10 @@ class _PostState extends State<Post> {
   void _threeDotMenuHandler(String value){
     switch (value) {
       case 'delete':
-      showDeleteDocDialog();
+        showDeleteDocDialog();
+        break;
+      case 'update':
+        showUpdateDocDialog();
         break;
       case 'send_message':
         break;
@@ -267,6 +270,9 @@ class _PostState extends State<Post> {
       });
   }
   /// 글 삭제 다이얼로그 종료
+  void showUpdateDocDialog(){
+
+  }
   /// 댓글 삭제 다이얼로그 시작
   void showDeleteReplyDialog(int index){
     showDialog(

@@ -9,6 +9,7 @@
   "user": "User",
 
   "title": "Title",
+  "article_content" : "Article Content",
   "main_text": "Main Text",
   "has_been_delete" : "This message has been deleted.",
 

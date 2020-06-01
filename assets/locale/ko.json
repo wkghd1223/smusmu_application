@@ -9,6 +9,7 @@
   "user": "사용자",
 
   "title": "제목",
+  "article_content" : "내용",
   "main_text": "본문",
   "has_been_delete" : "삭제된 메세지 입니다.",
 
