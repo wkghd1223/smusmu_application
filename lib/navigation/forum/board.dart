@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smusmu/func/func.dart';
 import 'package:smusmu/locale/Translations.dart';
-import 'package:smusmu/navigation/forum/create.dart';
+import 'package:smusmu/navigation/forum/createOrUpdate.dart';
 import 'package:smusmu/navigation/forum/post.dart';
 
 class Board extends StatefulWidget{

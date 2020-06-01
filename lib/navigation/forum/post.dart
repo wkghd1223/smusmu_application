@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smusmu/func/func.dart';
 import 'package:smusmu/locale/Translations.dart';
 import 'package:smusmu/navigation/forum/board.dart';
-import 'package:smusmu/navigation/forum/create.dart';
+import 'package:smusmu/navigation/forum/createOrUpdate.dart';
 
 class Post extends StatefulWidget{
   final String writer;
