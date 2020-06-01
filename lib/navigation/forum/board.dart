@@ -36,7 +36,7 @@ class _BoardState extends State<Board>{
           child: Icon(Icons.add),
           backgroundColor: Colors.orange,
           onPressed: ((){
-            Navigator.push(context, MaterialPageRoute(builder:(context)=>CreatePost(boardType: boardType,)));
+            Navigator.push(context, MaterialPageRoute(builder:(context)=>CreatePost(boardType: boardType, isCreate: true,)));
           }),
         ),
         body: SafeArea(

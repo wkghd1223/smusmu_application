@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smusmu/func/func.dart';
 import 'package:smusmu/locale/Translations.dart';
 import 'package:smusmu/navigation/forum/board.dart';
+import 'package:smusmu/navigation/forum/create.dart';
 
 class Post extends StatefulWidget{
   final String writer;
@@ -19,6 +20,7 @@ class _PostState extends State<Post> {
   final String boardType;
   final int postId;
   final String documentId;
+
   final TextEditingController _textController = new TextEditingController();
 
   String userId= 'wkghd1223';
@@ -271,6 +273,20 @@ class _PostState extends State<Post> {
   }
   /// 글 삭제 다이얼로그 종료
   void showUpdateDocDialog(){
+    Firestore.instance.collection('BOARD')
+        .document(documentId)
+        .get()
+        .then((value) {
+          print(documentId);
+          print(value['POST_NAME']);
+      Navigator.push(context, MaterialPageRoute(builder:(context) =>
+          CreatePost(
+            boardType: boardType,isCreate: false,
+            title: value['POST_NAME'],
+            content: value['POST_CONTENTS'],
+            documentId: documentId,
+          )));
+    });
 
   }
   /// 댓글 삭제 다이얼로그 시작
