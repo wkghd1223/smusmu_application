@@ -165,7 +165,7 @@ class _PostState extends State<Post> {
                                         children: reply.length ==0 ? empty : reply.asMap().map((i, element){
                                           return element['STATUS'] ? MapEntry(i, InkWell(
                                             onLongPress: (){
-                                              showDeleteReplyDialog(i);
+                                              replyDialog(i);
                                             },
                                             child: ListTile(
                                               leading:Text(element['USER_ID']),
@@ -180,7 +180,8 @@ class _PostState extends State<Post> {
                                           )) :
                                           MapEntry(i,InkWell(
                                             onLongPress: (){
-                                              showDeleteReplyDialog(i);
+                                              if(element['STATUS'])
+                                                replyDialog(i);
                                             },
                                             child: ListTile(
 //                                              leading:Text(element['USER_ID']),
@@ -289,8 +290,8 @@ class _PostState extends State<Post> {
     });
 
   }
-  /// 댓글 삭제 다이얼로그 시작
-  void showDeleteReplyDialog(int index){
+  /// 댓글 삭제/업데이트 컨트롤 시작
+  void replyDialog(int index){
     showDialog(
         context: context,
         builder: (context) {
@@ -301,6 +302,13 @@ class _PostState extends State<Post> {
                 child: Text(locale("cancel", context)),
                 onPressed: () {
                   Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text(locale("update", context)),
+                onPressed: () {
+                  Navigator.pop(context);
+                  showUpdateReplyDialog(index);
                 },
               ),
               FlatButton(
@@ -333,5 +341,72 @@ class _PostState extends State<Post> {
           );
         });
   }
-  /// 댓글 삭제 다이얼로그 종료
+  /// 댓글 삭제/업데이트 컨트롤  종료
+  /// 댓글 업데이트 다이얼로그 시작
+  void showUpdateReplyDialog(int index){
+    Firestore.instance.collection('BOARD').document(documentId).get().then((value) {
+      var replies = value['POST_REPLY'];
+      TextEditingController replyController = new TextEditingController(
+          text: replies[index]['REPLY_CONTENTS']);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Column(
+                children: [
+                  Text("temp"),
+              Container(
+                child: Card(
+                    elevation: 2,
+                    child:
+                    Row(
+                      children: [
+                        Flexible(
+                          child: TextField(
+                            controller: replyController,
+                            onSubmitted: (String text) {
+                              replies[index]['REPLY_CONTENTS'] = text;
+                              replies[index]['UPDATE_TIME'] = Timestamp.now();
+                              Firestore.instance.collection('BOARD')
+                                  .document(documentId)
+                                  .updateData({
+                                "POST_REPLY": replies
+                              });
+                              replyController.clear();
+                              Navigator.pop(context);
+                            },
+
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets
+                              .symmetric(horizontal: 4),
+                          child: IconButton(
+                            icon: Icon(Icons.send),
+                            onPressed: () {
+                                replies[index]['REPLY_CONTENTS'] = replyController.text;
+                                replies[index]['UPDATE_TIME'] = Timestamp.now();
+                                Firestore.instance.collection('BOARD')
+                                    .document(documentId)
+                                    .updateData({
+                                "POST_REPLY": replies
+                                });
+                                replyController.clear();
+                                Navigator.pop(context);
+                              }
+                            ,
+                          ),
+                        )
+                      ],
+                    )
+                ),
+              ),
+                ],
+              ),
+            );
+          });
+    });
+  }
+
+  /// 댓글 업데이트 다이얼로그 종료
 }
